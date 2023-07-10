@@ -1,5 +1,5 @@
 import React,{useState} from 'react'
-import 'bootstrap/dist/css/bootstrap.css';
+// import 'bootstrap/dist/css/bootstrap.css';
 import { NavLink } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
@@ -115,7 +115,7 @@ const Login= () => {
               
               <div className="col-md-10 col-lg-5 col-xl-5 d-flex align-items-center order-1 order-lg-2">
               <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
-          className="img-fluid" alt="Sample image"/>
+          className="img-fluid" alt=""/>
               
 
               </div>
