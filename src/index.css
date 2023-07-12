@@ -35,3 +35,18 @@ code {
   background-color: #eeeeee;
 
 }
+
+.animateDrop{
+  animation: dropdown 0.3s ;
+}
+
+@keyframes dropdown{
+  0%{
+    transform:  scaley(0);
+  }
+  
+  100%{
+    transform:  scaley(1);
+  }
+}
+

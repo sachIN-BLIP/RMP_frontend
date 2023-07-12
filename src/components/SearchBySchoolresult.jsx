@@ -50,7 +50,7 @@ export default function SearchBySchoolresult(props) {
     });
   });
 
-  console.log(allDepartments);
+  const [filterbyDepartmentName, setFilterbyDepartmentName] = useState("Select Department");
 
   //
   return (
@@ -69,7 +69,7 @@ export default function SearchBySchoolresult(props) {
               onClick={() => setDropShow(!dropShow)}
             >
               <button className="text-gray-900 text-opacity-70  text-base sm:text-lg font-normal leading-6">
-                Select Department
+              {filterbyDepartmentName}
               </button>
 
               {dropShow ? (
@@ -90,13 +90,13 @@ export default function SearchBySchoolresult(props) {
             <div
               className={
                 dropShow
-                  ? "dropdown bg-white rounded-t-lg mt-1 divide-y divide-slate-200  overflow-auto max-h-[235px] "
+                  ? "animateDrop dropdown bg-white rounded-t-lg mt-1 divide-y divide-slate-200  overflow-auto max-h-[235px] "
                   : "hidden"
               }
             >
               {allDepartments.map((dept) => {
                 return (
-                  <div className="option p-[10px] text-gray-900  text-[16px] font-normal leading-loose border-b-1 border-gray-400 pl-2">
+                  <div className="animateDrop option p-[10px] text-gray-900  text-[16px] font-normal leading-loose border-b-1 border-gray-400 pl-2" onClick={() => { setFilterbyDepartmentName(dept) }}>
                     {dept}
                   </div>
                 );
