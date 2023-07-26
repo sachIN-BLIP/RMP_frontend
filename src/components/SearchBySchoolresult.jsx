@@ -5,6 +5,7 @@ import "../index.css";
 import { MdOutlineExpandMore } from "react-icons/md";
 import { MdOutlineExpandLess } from "react-icons/md";
 import { NavLink } from "react-router-dom";
+import { AppContext, AppProvider } from "../context/AppContext";
 
 export default function SearchBySchoolresult(props) {
   //The search result will return an array of objects having details of the required profs. the array will be passed as props to this component.

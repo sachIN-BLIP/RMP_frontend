@@ -1,71 +1,43 @@
+
 import React from "react";
-import { useState } from "react";
+import { useState,useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import searchImg from "./images/undraw_people_search_re_5rre.svg";
 import "../index.css";
 import { MdOutlineExpandMore } from "react-icons/md";
 import { MdOutlineExpandLess } from "react-icons/md";
 import { NavLink } from "react-router-dom";
-import { motion } from "framer-motion";
+import axios from "axios";
 
-export default function SearchByProfresult(props) {
+
+export default function SearchByProfresult() {
   //The search result will return an array of objects having details of the required profs. the array will be passed as props to this component.
   //   let srchResult = props.resultedArray of objects;
-  let srchResult = [
-    {
-      profId: "1001",
-      fristName: "John",
-      lastName: "Wick",
-      dept: "Psychology",
-      school: "Indraprastha Institute of Information Technology, Delhi",
-      difficulty: 3.5,
-      rating: 4.5,
-      noOfRatings: 15,
-    },
-    {
-      profId: "1002",
-      fristName: "John",
-      lastName: "Cena",
-      dept: "Cloud Computing",
-      school: "Indraprastha Institute of Information Technology, Delhi",
-      difficulty: 3.5,
-      rating: 4.5,
-      noOfRatings: 15,
-    },
-    {
-      profId: "1003",
-      fristName: "John",
-      lastName: "Mayor",
-      dept: "Machine Learning",
-      school: "Indraprastha Institute of Information Technology, Delhi",
-      difficulty: 3.5,
-      rating: 4.5,
-      noOfRatings: 15,
-    },
-    {
-      profId: "1003",
-      fristName: "John",
-      lastName: "Mayor",
-      dept: "Machine Learning",
-      school: "Indraprastha Institute of Information Technology, Delhi",
-      difficulty: 3.5,
-      rating: 4.5,
-      noOfRatings: 15,
-    },
-    {
-      profId: "1004",
-      fristName: "John",
-      lastName: "Green",
-      dept: "Data Mining",
-      school: "Indraprastha Institute of Information Technology, Delhi",
-      difficulty: 3.5,
-      rating: 4.5,
-      noOfRatings: 15,
+  let url = "http://127.0.0.1:8000/home/searchprof"
+  const [srchResult, setSrchResult] = useState([]);
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const profName = searchParams.get("profName");
+  let response;
+
+  const fetchdata = async () => {
+    try {
+      response = await axios.post(url, {profName});
+      console.log(response)
+      setSrchResult(response.data);
+    } catch (error) {
+      console.error(error);
     }
-  ];
+  }
+  useEffect(() => {
+    fetchdata(); // Call the fetchdata function after the component mounts
+  }, []);
+  
+  console.log(srchResult);
   const [effect, setEffect] = useState(false);
   let allDepartments = []
   let noOfProfs = srchResult.length;
-  let displayName = srchResult[0].fristName;
+  let displayName = profName;
   const [dropShow, setDropShow] = useState(false);
   //   const [result, setResult] = useState(srchResult);
 
@@ -142,7 +114,7 @@ tracking-tighter "
               <div className="eachCard bg-neutral-100 mt-8 p-9 flex flex-col  rounded-2xl mx-[8.5vw]  md:mx-auto max-w-[93vw] min-h-[240px]  md:flex-row md:gap-24">
                 <div className="rating ">
                   <div
-                    className="bg-white max-w-[113px]  py-6 sm:p-8  rounded-lg flex
+                    className="bg-white max-w-[113px]  py-6 sm:p-8  rounded-lg flex 
                 justify-center items-center text-black text-[42px] font-normal leading-10"
                   >
                     {prof.rating}
@@ -153,7 +125,7 @@ tracking-tighter "
                 </div>
                 <div className="info pt-4">
                   <h1 className="name text-gray-900 text-4xl sm:text-[52px] font-medium leading-10">
-                    {prof.fristName} {prof.lastName}
+                    {prof.Name} 
                   </h1>
                   <h3 className="school text-gray-900 text-lg sm:text-[22px] font-medium  pt-4 leading-6 ">
                     {prof.school}
